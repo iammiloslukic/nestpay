@@ -1,5 +1,5 @@
 {
-    "name": "readycmsio/nestpay",
+    "name": "iammiloslukic/nestpay",
     "type": "library",
     "description": "Nestpay - Forked and modified by Milos Lukic",
     "authors": [
@@ -18,14 +18,14 @@
     ],
     "license": "MIT",
     "keywords": ["nestpay", "php", "composer", "laravel"],
-    "homepage": "https://github.com/readycmsio/nestpay",
+    "homepage": "https://github.com/iammiloslukic/nestpay",
     "require": {
         "php": ">=5.6",
         "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {
-            "ReadyCMSIO\\Nestpay\\": "src/"
+            "Iammiloslukic\\Nestpay\\": "src/"
         }
     },
     "suggest": {
@@ -34,10 +34,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ReadyCMSIO\\Nestpay\\Laravel\\NestpayServiceProvider"
+                "Iammiloslukic\\Nestpay\\Laravel\\NestpayServiceProvider"
             ],
             "aliases": {
-                "Nestpay": "ReadyCMSIO\\Nestpay\\Laravel\\Facade"
+                "Nestpay": "Iammiloslukic\\Nestpay\\Laravel\\Facade"
             }
         }
     }
