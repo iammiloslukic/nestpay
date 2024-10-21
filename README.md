@@ -10,7 +10,7 @@ Nestpay E-commerce integration, shipped with Laravel Package
 Require this package with composer.
 
 ```shell
-composer require cubes-doo/nestpay
+composer require iammiloslukic/nestpay
 ```
 
 For this package to work you need table **nestpay_payments** in database.
