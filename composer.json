@@ -1,7 +1,7 @@
 {
-    "name": "cubes-doo/nestpay",
+    "name": "readycmsio/nestpay",
     "type": "library",
-    "description": "Nestpay e-commerce integration",
+    "description": "Nestpay - Forked and modified by Milos Lukic",
     "authors": [
         {
             "name": "Aleksandar Dimic",
@@ -10,18 +10,22 @@
         {
             "name": "Aleksa Cvijic",
             "email": "aleksa.cvijic@cubes.rs"
+        },
+        {
+            "name": "Milos Lukic",
+            "email": "hello@miloslukic.com"
         }
     ],
     "license": "MIT",
     "keywords": ["nestpay", "php", "composer", "laravel"],
-    "homepage": "https://github.com/cubes-doo/nestpay",
+    "homepage": "https://github.com/readycmsio/nestpay",
     "require": {
         "php": ">=5.6",
-		"ext-curl": "*"
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {
-            "Cubes\\Nestpay\\": "src/"
+            "ReadyCMSIO\\Nestpay\\": "src/"
         }
     },
     "suggest": {
@@ -30,10 +34,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Cubes\\Nestpay\\Laravel\\NestpayServiceProvider"
+                "ReadyCMSIO\\Nestpay\\Laravel\\NestpayServiceProvider"
             ],
             "aliases": {
-                "Nestpay": "Cubes\\Nestpay\\Laravel\\Facade"
+                "Nestpay": "ReadyCMSIO\\Nestpay\\Laravel\\Facade"
             }
         }
     }
