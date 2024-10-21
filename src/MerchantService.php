@@ -476,7 +476,7 @@ class MerchantService {
 		$hash = self::calculateHash($storeKey, $hashParams, $hashAlgorithm);
 		
 		$formParameters = array_merge(
-			$workingPayment->getProperties(null, ['processed', 'oid', 'instalment', 'amount', 'trantype', 'currency', 'rnd', 'lang'], true),
+			$workingPayment->getProperties(null, ['processed', 'oid', 'amount', 'trantype', 'currency', 'rnd', 'lang'], true),
 			[
 				'clientid' => $this->getClientId(),
 				'storetype' => $this->getStoreType(),
@@ -484,8 +484,7 @@ class MerchantService {
 				'failUrl' => $this->getFailUrl(),
 				'oid' => $oid,
 				'amount' => $amount,
-				'TranType' => $trantype,
-				'Instalment' => $instalment ? $instalment : null,
+				'TranType' => $trantype, 
 				'currency' => $currency,
 				'rnd' => $rnd,
 				'lang' => $workingPayment->getLang(),
