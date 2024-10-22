@@ -1,6 +1,6 @@
 <?php
 
-namespace Cubes\Nestpay;
+namespace ReadyCMSIO\Nestpay;
 
 class MerchantService {
 	
@@ -66,23 +66,23 @@ class MerchantService {
 	}
 	
 	/**
-	 * @var \Cubes\Nestpay\MerchantConfig 
+	 * @var \ReadyCMSIO\Nestpay\MerchantConfig 
 	 */
 	protected $merchantConfig;
 	
 	/**
 	 *
-	 * @var \Cubes\Nestpay\NestpayApi 
+	 * @var \ReadyCMSIO\Nestpay\NestpayApi 
 	 */
 	protected $nestpayApi;
 	
 	/**
-	 * @var \Cubes\Nestpay\PaymentDao 
+	 * @var \ReadyCMSIO\Nestpay\PaymentDao 
 	 */
 	protected $paymentDao;
 	
 	/**
-	 * @var \Cubes\Nestpay\Payment 
+	 * @var \ReadyCMSIO\Nestpay\Payment 
 	 */
 	protected $workingPayment;
 	
@@ -108,7 +108,7 @@ class MerchantService {
 	
 	/**
 	 * @param array $config
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function __construct(array $config = null) {
 		if (is_array($config)) {
@@ -130,7 +130,7 @@ class MerchantService {
 	
 	/**
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function setProperties(array $properties) {
 		foreach ($properties as $key => $value) {
@@ -155,7 +155,7 @@ class MerchantService {
 	}
 	
 	/**
-	 * @return \Cubes\Nestpay\MerchantConfig 
+	 * @return \ReadyCMSIO\Nestpay\MerchantConfig 
 	 */
 	public function getMerchantConfig() {
 		if (!$this->merchantConfig) {
@@ -166,8 +166,8 @@ class MerchantService {
 	}
 	
 	/**
-	 * @param array|\Cubes\Nestpay\MerchantConfig $merchantConfig
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @param array|\ReadyCMSIO\Nestpay\MerchantConfig $merchantConfig
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function setMerchantConfig($merchantConfig) {
 		if (is_array($merchantConfig)) {
@@ -175,7 +175,7 @@ class MerchantService {
 		}
 		
 		if (!($merchantConfig instanceof MerchantConfig)) {
-			throw new \InvalidArgumentException('Argument $merchantConfig must be array or instanceof \Cubes\Nestpay\MerchantConfig');
+			throw new \InvalidArgumentException('Argument $merchantConfig must be array or instanceof \ReadyCMSIO\Nestpay\MerchantConfig');
 		}
 		
 		$this->merchantConfig = $merchantConfig;
@@ -191,15 +191,15 @@ class MerchantService {
 	}
 	
 	/**
-	 * @return \Cubes\Nestpay\PaymentDao
+	 * @return \ReadyCMSIO\Nestpay\PaymentDao
 	 */
 	public function getPaymentDao() {
 		return $this->paymentDao;
 	}
 	
 	/**
-	 * @param \Cubes\Nestpay\PaymentDao $paymentDao
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @param \ReadyCMSIO\Nestpay\PaymentDao $paymentDao
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function setPaymentDao(PaymentDao $paymentDao) {
 		$this->paymentDao = $paymentDao;
@@ -211,7 +211,7 @@ class MerchantService {
 	 *
 	 * @param \PDO $pdo
 	 * @param string $tableName
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function setPDO($pdo, $tableName = null)
 	{
@@ -221,7 +221,7 @@ class MerchantService {
 	
 	/**
 	 * @param scalar $oid
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 * @throws MerchantServiceException In case no paymentDao is set
 	 */
 	protected function loadPayment($oid) {
@@ -244,7 +244,7 @@ class MerchantService {
 	
 	/**
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	protected function createPayment($properties) {
 		$paymentDao = $this->getPaymentDao();
@@ -266,7 +266,7 @@ class MerchantService {
 	}
 	
 	/**
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function getWorkingPayment() {
 		if (!$this->workingPayment) {
@@ -277,8 +277,8 @@ class MerchantService {
 	
 	/**
 	 * 
-	 * @param scalar|array|\Cubes\Nestpay\Payment $workingPayment
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @param scalar|array|\ReadyCMSIO\Nestpay\Payment $workingPayment
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function setWorkingPayment($workingPayment) {
 		if (is_scalar($workingPayment)) {
@@ -308,9 +308,9 @@ class MerchantService {
 	
 	/**
 	 * Action to perform on successful payment
-	 * Callable takes one parameter \Cubes\Nestpay\Payment $payment which will be $workingPayment
+	 * Callable takes one parameter \ReadyCMSIO\Nestpay\Payment $payment which will be $workingPayment
 	 * @param callable $handler
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function onSuccessfulPayment(callable $handler) {
 		$this->paymentSuccessHandler = $handler;
@@ -319,9 +319,9 @@ class MerchantService {
 	
 	/**
 	 * Action to perform on failed payment
-	 * Callable takes one parameter \Cubes\Nestpay\Payment $payment which will be $workingPayment
+	 * Callable takes one parameter \ReadyCMSIO\Nestpay\Payment $payment which will be $workingPayment
 	 * @param callable $handler
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function onFailedPayment(callable $handler) {
 		$this->paymentFailedHandler = $handler;
@@ -330,9 +330,9 @@ class MerchantService {
 	
 	/**
 	 * Action to perform on error
-	 * Callable takes two parameters 1) \Cubes\Nestpay\Payment $payment which will be $workingPayment 2) \Throwable $ex last exception occured
+	 * Callable takes two parameters 1) \ReadyCMSIO\Nestpay\Payment $payment which will be $workingPayment 2) \Throwable $ex last exception occured
 	 * @param callable $handler
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function onError(callable $handler) {
 		$this->errorHandler = $handler;
@@ -341,7 +341,7 @@ class MerchantService {
 	
 	/**
 	 * @param string $eventType
-	 * @return \Cubes\Nestpay\MerchantService
+	 * @return \ReadyCMSIO\Nestpay\MerchantService
 	 */
 	public function triggerEvent($eventType) {
 		$workingPayment = $this->workingPayment;
@@ -436,7 +436,7 @@ class MerchantService {
 	
 	/**
 	 * 
-	 * @param scalar|array|\Cubes\Nestpay\Payment $workingPayment
+	 * @param scalar|array|\ReadyCMSIO\Nestpay\Payment $workingPayment
 	 * @return type
 	 */
 	public function paymentMakeRequestParameters($workingPayment = null, $hashAlgorithm = 'ver2') {
@@ -505,8 +505,8 @@ class MerchantService {
 	 * @param boolean $fromFailUrl Weather process is called from failUrl page or not
 	 * @param boolean $triggerEvents Trigger events "onPaymentSuccess", "onPaymentFailed", "onError" or NOT
 	 * @param boolean $throwException Weather to throw exception on error or just trigger error event 
-	 * @return \Cubes\Nestpay\Payment
-	 * @throws \Cubes\Nestpay\PaymentAlreadyProcessedException
+	 * @return \ReadyCMSIO\Nestpay\Payment
+	 * @throws \ReadyCMSIO\Nestpay\PaymentAlreadyProcessedException
 	 * @throws \Exception
 	 */
 	public function paymentProcess3DGateResponse(array $responseData, $fromFailUrl = false, $triggerEvents = true, $throwException = true) {
@@ -660,11 +660,11 @@ class MerchantService {
 	 */
 	
 	/**
-	 * @param scalar|array|\Cubes\Nestpay\Payment $payment
+	 * @param scalar|array|\ReadyCMSIO\Nestpay\Payment $payment
 	 * @param boolean $triggerEvents Trigger events "onPaymentSuccess", "onPaymentFailed", "onError" or NOT
 	 * @param boolean $forceProcessed Process payment even it has been processed
 	 * @param boolean $throwException throw exceptions or not
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function paymentProcessOverNestpayApi($payment = null, $triggerEvents = true, $forceProcessed = false, $throwException = true) {
 		if (!is_null($payment)) {
@@ -718,7 +718,7 @@ class MerchantService {
 	}
 
 	/**
-	 * @param string|\Cubes\Nestpay\Payment $payment
+	 * @param string|\ReadyCMSIO\Nestpay\Payment $payment
 	 * @return mixed The result from api as array
 	 */
 	public function postAuthorizationOverNestpayApi($payment = null, $amount = null, $triggerEvents = true, $throwException = true)
@@ -754,7 +754,7 @@ class MerchantService {
 	}
 
 	/**
-	 * @param string|\Cubes\Nestpay\Payment $payment
+	 * @param string|\ReadyCMSIO\Nestpay\Payment $payment
 	 * @return mixed The result from api as array
 	 */
 	public function voidOverNestpayApi($payment = null, $triggerEvents = true, $throwException = true)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cubes\Nestpay;
+namespace ReadyCMSIO\Nestpay;
 
 interface Payment extends \ArrayAccess, \JsonSerializable {
 	
@@ -174,7 +174,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	 * 
 	 * @param string $key
 	 * @param scalar $value
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 * @throws \InvalidArgumentException
 	 */
 	public function setProperty($key, $value);
@@ -183,7 +183,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/** 
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setProperties(array $properties);
 	
@@ -206,7 +206,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param salar $oid
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setOid($oid);
 	
@@ -217,7 +217,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param salar $rnd
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setRnd($rnd);
 	
@@ -228,7 +228,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param salar $currency
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setCurrency($currency);
 	
@@ -239,7 +239,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param salar $lang
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setLang($lang);
 	
@@ -250,7 +250,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param float $amount
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setAmount($amount);
 	
@@ -261,7 +261,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param float $email
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setEmail($email);
 	
@@ -272,7 +272,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param string $Trantype
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setTrantype($Trantype);
 	
@@ -283,7 +283,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param scalar $instalment
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setInstalment($instalment);
 	
@@ -294,7 +294,7 @@ interface Payment extends \ArrayAccess, \JsonSerializable {
 	
 	/**
 	 * @param int $processed
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setProcessed($processed);
 	

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cubes\Nestpay;
+namespace ReadyCMSIO\Nestpay;
 
 class NestpayApi
 {
@@ -30,7 +30,7 @@ class NestpayApi
 
 	/**
 	 * @param scalar $clientId
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 * @throws \InvalidArgumentException
 	 */
 	public function setClientId($clientId)
@@ -54,7 +54,7 @@ class NestpayApi
 
 	/**
 	 * @param scalar $apiEndpointUrl
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 * @throws \InvalidArgumentException
 	 */
 	public function setApiEndpointUrl($apiEndpointUrl)
@@ -76,7 +76,7 @@ class NestpayApi
 
 	/**
 	 * @param scalar $apiName
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 * @throws \InvalidArgumentException
 	 */
 	public function setApiName($apiName)
@@ -98,7 +98,7 @@ class NestpayApi
 
 	/**
 	 * @param scalar $apiPassword
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 * @throws \InvalidArgumentException
 	 */
 	public function setApiPassword($apiPassword)
@@ -120,7 +120,7 @@ class NestpayApi
 
 	/**
 	 * @param scalar $userAgent
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 * @throws \InvalidArgumentException
 	 */
 	public function setUserAgent($userAgent)
@@ -142,7 +142,7 @@ class NestpayApi
 
 	/**
 	 * @param string $lastHttpResponse
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 */
 	private function setLastHttpResponse($lastHttpResponse)
 	{
@@ -160,7 +160,7 @@ class NestpayApi
 
 	/**
 	 * @param string $lastRequestLog
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 */
 	private function setLastRequestLog($lastRequestLog)
 	{
@@ -171,7 +171,7 @@ class NestpayApi
 
 	/**
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\NestpayApi
+	 * @return \ReadyCMSIO\Nestpay\NestpayApi
 	 */
 	public function setProperties(array $properties)
 	{

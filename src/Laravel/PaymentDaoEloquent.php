@@ -45,7 +45,7 @@ class PaymentDaoEloquent implements PaymentDao
     /**
 	 * Fetch payment by $oid
 	 * 
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 * @param scalar $oid
 	 */
     public function getPayment($oid)
@@ -56,8 +56,8 @@ class PaymentDaoEloquent implements PaymentDao
 	/**
 	 * Saves the payment
 	 * 
-	 * @param \Cubes\Nestpay\Payment $payment
-	 * @return \Cubes\Nestpay\Payment
+	 * @param \ReadyCMSIO\Nestpay\Payment $payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
     public function savePayment(Payment $payment)
     {
@@ -83,7 +83,7 @@ class PaymentDaoEloquent implements PaymentDao
 	 * Creates new payment
 	 *
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
     public function createPayment(array $properties)
     {

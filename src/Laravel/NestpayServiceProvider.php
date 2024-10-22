@@ -91,13 +91,13 @@ class NestpayServiceProvider extends ServiceProvider
 
             $merchantService->onFailedPayment(function ($payment) {
                 //just trigger event
-                event(new \Cubes\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent($payment));
+                event(new \ReadyCMSIO\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent($payment));
             })->onSuccessfulPayment(function($payment) {
                 //just trigger event
-                event(new \Cubes\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent($payment));
+                event(new \ReadyCMSIO\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent($payment));
             })->onError(function($payment, $ex) {
                 //just trigger event
-                event(new \Cubes\Nestpay\Laravel\NestpayPaymentProcessedErrorEvent($payment, $ex));
+                event(new \ReadyCMSIO\Nestpay\Laravel\NestpayPaymentProcessedErrorEvent($payment, $ex));
 
                 if (config('nestpay.throwExceptions')) {
                     throw $ex;

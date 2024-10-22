@@ -1,6 +1,6 @@
 <?php
 
-namespace Cubes\Nestpay;
+namespace ReadyCMSIO\Nestpay;
 
 class Nestpay3DGateResponseException extends NestpayException {
 	

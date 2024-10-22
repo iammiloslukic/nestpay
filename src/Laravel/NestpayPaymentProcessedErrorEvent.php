@@ -12,7 +12,7 @@ class NestpayPaymentProcessedErrorEvent
     use Dispatchable, SerializesModels;
 
     /**
-     * @var \Cubes\Nestpay\Payment
+     * @var \ReadyCMSIO\Nestpay\Payment
      */
     protected $payment;
 
@@ -34,7 +34,7 @@ class NestpayPaymentProcessedErrorEvent
     }
 
     /**
-     * @return \Cubes\Nestpay\Payment
+     * @return \ReadyCMSIO\Nestpay\Payment
      */
     public function getPayment()
     {

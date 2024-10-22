@@ -1,6 +1,6 @@
 <?php
 
-namespace Cubes\Nestpay;
+namespace ReadyCMSIO\Nestpay;
 
 trait PaymentTrait 
 {
@@ -43,7 +43,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param salar $oid
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setOid($oid) {
 		if (!is_null($oid) && !is_scalar($oid)) {
@@ -65,7 +65,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param salar $rnd
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setRnd($rnd) {
 		if (!is_null($rnd) && !is_scalar($rnd)) {
@@ -86,7 +86,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param salar $currency
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setCurrency($currency) {
 		if (!is_null($currency) && !is_scalar($currency)) {
@@ -107,7 +107,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param salar $lang
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setLang($lang) {
 		if (!is_null($lang) && !is_scalar($lang)) {
@@ -128,7 +128,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param float $amount
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setAmount($amount) {
 		if (!is_null($amount) && (!is_numeric($amount) || $amount <= 0)) {
@@ -149,7 +149,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param float $email
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setEmail($email) {
 		if (!is_string($email) || empty($email)) {
@@ -170,7 +170,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param string $Trantype
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setTrantype($Trantype) {
 		if (!is_null($Trantype) && $Trantype != self::TRAN_TYPE_AUTH && $Trantype != self::TRAN_TYPE_PREAUTH) {
@@ -191,7 +191,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param scalar $instalment
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setInstalment($instalment) {
 		if (!is_null($instalment) && !is_scalar($instalment)) {
@@ -212,7 +212,7 @@ trait PaymentTrait
 	
 	/**
 	 * @param int $processed
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setProcessed($processed) {
 

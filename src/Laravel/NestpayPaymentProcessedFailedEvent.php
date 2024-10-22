@@ -24,7 +24,7 @@ class NestpayPaymentProcessedFailedEvent
     }
 
     /**
-     * @return \Cubes\Nestpay\Payment
+     * @return \ReadyCMSIO\Nestpay\Payment
      */
     public function getPayment()
     {

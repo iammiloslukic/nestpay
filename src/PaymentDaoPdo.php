@@ -1,6 +1,6 @@
 <?php
 
-namespace Cubes\Nestpay;
+namespace ReadyCMSIO\Nestpay;
 
 class PaymentDaoPdo implements PaymentDao 
 {
@@ -71,7 +71,7 @@ class PaymentDaoPdo implements PaymentDao
 	/**
 	 * Fetch payment by $oid
 	 * 
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 * @param scalar $oid
 	 */
     public function getPayment($oid)
@@ -97,8 +97,8 @@ class PaymentDaoPdo implements PaymentDao
 	/**
 	 * Saves the payment
 	 * 
-	 * @param \Cubes\Nestpay\Payment $payment
-	 * @return \Cubes\Nestpay\Payment
+	 * @param \ReadyCMSIO\Nestpay\Payment $payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
     public function savePayment(Payment $payment)
     {
@@ -135,7 +135,7 @@ class PaymentDaoPdo implements PaymentDao
 	 * Creates new payment
 	 *
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
     public function createPayment(array $properties)
     {

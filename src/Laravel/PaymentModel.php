@@ -30,7 +30,7 @@ class PaymentModel extends Model implements Payment
 	 * 
 	 * @param string $key
 	 * @param scalar $value
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 * @throws \InvalidArgumentException
 	 */
 	public function setProperty($key, $value) {
@@ -49,7 +49,7 @@ class PaymentModel extends Model implements Payment
 	
 	/** 
 	 * @param array $properties
-	 * @return \Cubes\Nestpay\Payment
+	 * @return \ReadyCMSIO\Nestpay\Payment
 	 */
 	public function setProperties(array $properties) {
 		foreach ($properties as $key => $val) {

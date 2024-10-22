@@ -10,7 +10,7 @@ Nestpay E-commerce integration, shipped with Laravel Package
 Require this package with composer.
 
 ```shell
-composer require iammiloslukic/nestpay
+composer require cubes-doo/nestpay
 ```
 
 For this package to work you need table **nestpay_payments** in database.
@@ -27,7 +27,7 @@ mysql -u root -p your_db_name < vendor/cubes-doo/nestpay/resources/nestpay_payme
 
 ### Bootstrap & Configuration
 
-Main class to use is **\Cubes\Nestpay\MerchantService**
+Main class to use is **\ReadyCMSIO\Nestpay\MerchantService**
 
 Instanciate the class and pass configuration parameters:
 
@@ -66,22 +66,22 @@ If you want to have some other name for the **nestpay_payments** table, somethin
 $nestpayMerchantService->setPDO($pdo, 'your_table'); //'your_table' is name of the table for payments
 ```
 
-Configure **\Cubes\Nestpay\MerchantService** what to do when successful payment occurres or what to do on failed payment:
+Configure **\ReadyCMSIO\Nestpay\MerchantService** what to do when successful payment occurres or what to do on failed payment:
 
 ```php
 $merchantService->onFailedPayment(function ($payment) {
-    //$payment is instance of \Cubes\Nestpay\Payment
+    //$payment is instance of \ReadyCMSIO\Nestpay\Payment
 
     //send an email for failed payment attempt
-    // $email = $payment->getProperty(\Cubes\Nestpay\Payment::PROP_EMAIL);
-    // $customerName = $payment->getProperty(\Cubes\Nestpay\Payment::PROP_BILLTONAME);
+    // $email = $payment->getProperty(\ReadyCMSIO\Nestpay\Payment::PROP_EMAIL);
+    // $customerName = $payment->getProperty(\ReadyCMSIO\Nestpay\Payment::PROP_BILLTONAME);
 
 })->onSuccessfulPayment(function($payment) {
-    //$payment is instance of \Cubes\Nestpay\Payment
+    //$payment is instance of \ReadyCMSIO\Nestpay\Payment
 
     //send an email for successful payment
-    // $email = $payment->getProperty(\Cubes\Nestpay\Payment::PROP_EMAIL);
-    // $customerName = $payment->getProperty(\Cubes\Nestpay\Payment::PROP_BILLTONAME);
+    // $email = $payment->getProperty(\ReadyCMSIO\Nestpay\Payment::PROP_EMAIL);
+    // $customerName = $payment->getProperty(\ReadyCMSIO\Nestpay\Payment::PROP_BILLTONAME);
 
     //do stuff related to the siccessfull payment
 });
@@ -90,8 +90,8 @@ $merchantService->onFailedPayment(function ($payment) {
 **IMPORTANT NOTICE!!!**
 The **onSuccessfulPayment** and **onFailedPayment** could be triggered in 2 ways
 
-- By calling **\Cubes\Nestpay\MerchantService::paymentProcess3DGateResponse** when customer is redirected back to you page (see documentation below)
-- By calling **\Cubes\Nestpay\MerchantService::paymentProcessOverNestpayApi** from your cron job (see documentation below)
+- By calling **\ReadyCMSIO\Nestpay\MerchantService::paymentProcess3DGateResponse** when customer is redirected back to you page (see documentation below)
+- By calling **\ReadyCMSIO\Nestpay\MerchantService::paymentProcessOverNestpayApi** from your cron job (see documentation below)
 
 For that reason it is important to write your logic, like sending email or changing the order status, for successuful or failed payment IN THIS HANDLERS!!! (so you don't have to write it twice)
 
@@ -102,46 +102,46 @@ You should have confirmation page from which customers are redirected to the ban
 
 That page should have form with lots of hidden paramters.
 
-Use **\Cubes\Nestpay\MerchantService::paymentMakeRequestParameters** method to generate necessary parameters (the HASH parameter and other necessary parameters)
+Use **\ReadyCMSIO\Nestpay\MerchantService::paymentMakeRequestParameters** method to generate necessary parameters (the HASH parameter and other necessary parameters)
 
 ```php
 <?php 
 
 $requestParameters = $nestpayMerchantService->paymentMakeRequestParameters([
     'amount' =>  123.45,
-    'currency' => \Cubes\Nestpay\Payment::CURRENCY_RSD,
+    'currency' => \ReadyCMSIO\Nestpay\Payment::CURRENCY_RSD,
     'lang' => 'sr',
     //set transaction type to PreAuth or Auth
-    \Cubes\Nestpay\Payment::PROP_TRANTYPE => \Cubes\Nestpay\Payment::TRAN_TYPE_PREAUTH,
+    \ReadyCMSIO\Nestpay\Payment::PROP_TRANTYPE => \ReadyCMSIO\Nestpay\Payment::TRAN_TYPE_PREAUTH,
     //this is email of the customer
-    \Cubes\Nestpay\Payment::PROP_EMAIL => 'john.doe@example.com',
+    \ReadyCMSIO\Nestpay\Payment::PROP_EMAIL => 'john.doe@example.com',
     
     //below are optional parameters
-    \Cubes\Nestpay\Payment::PROP_INVOICENUMBER => '123456789', //must be numeric!!
-    \Cubes\Nestpay\Payment::PROP_BILLTONAME => 'John Doe',\Cubes\Nestpay\Payment::PROP_BILLTOSTREET1 => 'BillToStreet1',
-    \Cubes\Nestpay\Payment::PROP_BILLTOSTREET2 => 'BillToStreet2',
-    \Cubes\Nestpay\Payment::PROP_BILLTOCITY => 'BillToCity',
-    \Cubes\Nestpay\Payment::PROP_BILLTOSTATEPROV => 'BillToStateProv',
-    \Cubes\Nestpay\Payment::PROP_BILLTOPOSTALCODE => 'BillToPostalCode',
-    \Cubes\Nestpay\Payment::PROP_BILLTOCOUNTRY => 'RS',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOCOMPANY => 'ShipToCompany',
-    \Cubes\Nestpay\Payment::PROP_SHIPTONAME => 'ShipToName',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOSTREET1 => 'ShipToStreet1',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOSTREET2 => 'ShipToStreet2',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOCITY => 'ShipToCity',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOSTATEPROV => 'ShipToStateProv',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOPOSTALCODE => 'ShipToPostalCode',
-    \Cubes\Nestpay\Payment::PROP_SHIPTOCOUNTRY => 'RS',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA1 => 'DimCriteria1',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA2 => 'DimCriteria2',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA3 => 'DimCriteria3',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA4 => 'DimCriteria4',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA5 => 'DimCriteria5',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA6 => 'DimCriteria6',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA7 => 'DimCriteria7',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA8 => 'DimCriteria8',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA9 => 'DimCriteria9',
-    \Cubes\Nestpay\Payment::PROP_DIMCRITERIA10 => 'DimCriteria10',
+    \ReadyCMSIO\Nestpay\Payment::PROP_INVOICENUMBER => '123456789', //must be numeric!!
+    \ReadyCMSIO\Nestpay\Payment::PROP_BILLTONAME => 'John Doe',\ReadyCMSIO\Nestpay\Payment::PROP_BILLTOSTREET1 => 'BillToStreet1',
+    \ReadyCMSIO\Nestpay\Payment::PROP_BILLTOSTREET2 => 'BillToStreet2',
+    \ReadyCMSIO\Nestpay\Payment::PROP_BILLTOCITY => 'BillToCity',
+    \ReadyCMSIO\Nestpay\Payment::PROP_BILLTOSTATEPROV => 'BillToStateProv',
+    \ReadyCMSIO\Nestpay\Payment::PROP_BILLTOPOSTALCODE => 'BillToPostalCode',
+    \ReadyCMSIO\Nestpay\Payment::PROP_BILLTOCOUNTRY => 'RS',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOCOMPANY => 'ShipToCompany',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTONAME => 'ShipToName',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOSTREET1 => 'ShipToStreet1',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOSTREET2 => 'ShipToStreet2',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOCITY => 'ShipToCity',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOSTATEPROV => 'ShipToStateProv',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOPOSTALCODE => 'ShipToPostalCode',
+    \ReadyCMSIO\Nestpay\Payment::PROP_SHIPTOCOUNTRY => 'RS',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA1 => 'DimCriteria1',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA2 => 'DimCriteria2',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA3 => 'DimCriteria3',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA4 => 'DimCriteria4',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA5 => 'DimCriteria5',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA6 => 'DimCriteria6',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA7 => 'DimCriteria7',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA8 => 'DimCriteria8',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA9 => 'DimCriteria9',
+    \ReadyCMSIO\Nestpay\Payment::PROP_DIMCRITERIA10 => 'DimCriteria10',
 ]);
 ?>
 <html>
@@ -168,7 +168,7 @@ After submitting this form customer is redirected to 3D gate bank card processin
 
 After entering Card details, customer is redirected back to your website on success or fail url.
 
-You should call **\Cubes\Nestpay\MerchantService::paymentProcess3DGateResponse** method to process $_POST parameters.
+You should call **\ReadyCMSIO\Nestpay\MerchantService::paymentProcess3DGateResponse** method to process $_POST parameters.
 
 On success page:
 
@@ -202,7 +202,7 @@ $payment = $nestpayMerchantService->paymentProcess3DGateResponse($_POST, true);
 
 When customer leaves the 3D Gate Page there is a possibility that he/she is NOT going to be redirected back to your website (internet connection broke, customer closes the browser etc.).
 
-You should use **\Cubes\Nestpay\MerchantService::paymentProcessOverNestpayApi** method to process payment over API in some cron job.
+You should use **\ReadyCMSIO\Nestpay\MerchantService::paymentProcessOverNestpayApi** method to process payment over API in some cron job.
 
 ```php
 //$oid is the OID of some unprocessed payment (WHERE `processed` != 1)
@@ -217,7 +217,7 @@ $payment = $nestpayMerchantService->paymentProcessOverNestpayApi($oid);
 
 For two step payment (PreAuth and PostAuth) you should use Nestpay API to capture reserved amount of successful payment.
 
-Use **\Cubes\Nestpay\MerchantService::postAuthorizationOverNestpayApi**
+Use **\ReadyCMSIO\Nestpay\MerchantService::postAuthorizationOverNestpayApi**
 
 ```php
 //$oid is the OID of the payment
@@ -233,7 +233,7 @@ $result = $nestpayMerchantService->postAuthorizationOverNestpayApi($oid, $amount
 
 #### Void payment  over API
 
-To void payment use **\Cubes\Nestpay\MerchantService::voidOverNestpayApi**
+To void payment use **\ReadyCMSIO\Nestpay\MerchantService::voidOverNestpayApi**
 
 ```php
 //$oid is the OID of the payment
@@ -242,15 +242,15 @@ $result = $nestpayMerchantService->voidOverNestpayApi($oid);
 
 ### Get working payment
 
-If you want to get the last processed payment use **\Cubes\Nestpay\MerchantService::getWorkingPayment**
+If you want to get the last processed payment use **\ReadyCMSIO\Nestpay\MerchantService::getWorkingPayment**
 
 ```php
 
-//$payment is instance of \Cubes\Nestpay\Payment 
+//$payment is instance of \ReadyCMSIO\Nestpay\Payment 
 $payment = $nestpayMerchantService->getWorkingPayment();
 
 //get some of the payment properties
-$email = $payment->getProperty(\Cubes\Nestpay\Payment::PROPERTY_EMAIL);
+$email = $payment->getProperty(\ReadyCMSIO\Nestpay\Payment::PROPERTY_EMAIL);
 
 //for some important properties there are getters
 $email = $payment->getEmail();
@@ -261,18 +261,18 @@ $email = $payment->getEmail();
 ### Customize saving payment information
 
 If you prefer some other method to store payments, you should create "Data Access Object" class of your own.
-Your DAO class must implement **\Cubes\Nestpay\PaymentDao** interface:
+Your DAO class must implement **\ReadyCMSIO\Nestpay\PaymentDao** interface:
 
 ```php
-use \Cubes\Nestpay\PaymentDao;
-use \Cubes\Nestpay\Payment;
+use \ReadyCMSIO\Nestpay\PaymentDao;
+use \ReadyCMSIO\Nestpay\Payment;
 
 class MyPaymentDao implements PaymentDao
 {
     /**
      * Fetch payment by $oid
      * 
-     * @return \Cubes\Nestpay\Payment
+     * @return \ReadyCMSIO\Nestpay\Payment
      * @param scalar $oid
      */
     public function getPayment($oid)
@@ -283,8 +283,8 @@ class MyPaymentDao implements PaymentDao
     /**
      * Saves the payment
      * 
-     * @param \Cubes\Nestpay\Payment $payment
-     * @return \Cubes\Nestpay\Payment
+     * @param \ReadyCMSIO\Nestpay\Payment $payment
+     * @return \ReadyCMSIO\Nestpay\Payment
      */
     public function savePayment(Payment $payment)
     {
@@ -295,7 +295,7 @@ class MyPaymentDao implements PaymentDao
      * Creates new payment
      *
      * @param array $properties
-     * @return \Cubes\Nestpay\Payment
+     * @return \ReadyCMSIO\Nestpay\Payment
      */
     public function createPayment(array $properties)
     {
@@ -304,7 +304,7 @@ class MyPaymentDao implements PaymentDao
 }
 ```
 
-Make **\Cubes\Nestpay\MerchantService** use your DAO class
+Make **\ReadyCMSIO\Nestpay\MerchantService** use your DAO class
 
 ```php
 $nestpayMerchantService->setPaymentDao(new MyPaymentDao());
@@ -314,7 +314,7 @@ $nestpayMerchantService->setPaymentDao(new MyPaymentDao());
 
 Package `cubes-doo/nestpay` comes with built Laravel package.
 
-Service provider class is **\Cubes\Nestpay\Laravel\NestpayServiceProvider**.
+Service provider class is **\ReadyCMSIO\Nestpay\Laravel\NestpayServiceProvider**.
 ###### If you are using Laravel version < 5.5 you must include service provider manually
 
 ```php
@@ -329,18 +329,18 @@ return [
     'providers' => [
         //...
 
-        \Cubes\Nestpay\Laravel\NestpayServiceProvider::class
+        \ReadyCMSIO\Nestpay\Laravel\NestpayServiceProvider::class
     ],
 
     'aliases' => [
         //...
         // optinally add alias for facade
-        'Nestpay' => \Cubes\Nestpay\Laravel\Facade::class,
+        'Nestpay' => \ReadyCMSIO\Nestpay\Laravel\Facade::class,
     ],
 ];
 ```
 
-Before using the \Cubes\Nestpay\MerchantService class you should **edit your .env file**:
+Before using the \ReadyCMSIO\Nestpay\MerchantService class you should **edit your .env file**:
 ```shell
 #add this to your .env file and set you clientID storeKey etc
 NESTPAY_MERCHANT_CLIENT_ID=********
@@ -351,12 +351,12 @@ NESTPAY_MERCHANT_API_PASSWORD=*******
 NESTPAY_MERCHANT_API_ENDPOINT_URL=https://testsecurepay.eway2pay.com/fim/api
 ```
 
-The package provides **\Cubes\Nestpay\MerchantService** class which could be injected in controllers and other points in Laravel application:
+The package provides **\ReadyCMSIO\Nestpay\MerchantService** class which could be injected in controllers and other points in Laravel application:
 
 ```php
 namespace App\Http\Controllers;
 
-use \Cubes\Nestpay\MerchantService;
+use \ReadyCMSIO\Nestpay\MerchantService;
 
 class TestController extends Controller
 {
@@ -367,7 +367,7 @@ class TestController extends Controller
 }
 ```
 
-Also **\Cubes\Nestpay\MerchantService** could be obtained using facade or service container:
+Also **\ReadyCMSIO\Nestpay\MerchantService** could be obtained using facade or service container:
 
 ```php
 
@@ -548,8 +548,8 @@ THIS IS THE MOST IMPORTANT CUSTOMIZATION!!!
 
 When payment is processed (eather over NestpayController or nestpay::handle-unprocessed-payments command) the following events are triggered:
 
-- \Cubes\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent - for successful payments
-- \Cubes\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent - for failed events
+- \ReadyCMSIO\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent - for successful payments
+- \ReadyCMSIO\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent - for failed events
 
 At this point you should have the published event subscriber **\App\Listeners\NestpayEventsSubscriber**  which is configured to listen to those events.
 
@@ -568,7 +568,7 @@ class NestpayEventsSubscriber
 
         //CUSTOMER HAS PAID, DO RELATED STUFF HERE
 
-        //$payment is instanceof Eloquent Model which implements \Cubes\Nestpay\Payment interface
+        //$payment is instanceof Eloquent Model which implements \ReadyCMSIO\Nestpay\Payment interface
 
         //sending email
         \Mail::to(
